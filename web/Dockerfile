@@ -3,10 +3,8 @@ FROM node:20.18.1
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm install && \
-    npm install --save-dev prettier react-dom react-router-dom
 
-RUN npm dedupe
+RUN npm install
 
 COPY ./src/styles/ /app/src/styles/
 COPY ./src/components/ /app/src/components/
