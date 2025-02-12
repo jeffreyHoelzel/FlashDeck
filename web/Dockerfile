@@ -9,7 +9,6 @@ RUN npm install && \
 RUN npm dedupe
 
 COPY ./src/styles/ /app/src/styles/
-COPY ./src/styles/components/ /app/src/styles/components/
 COPY ./src/components/ /app/src/components/
 
 RUN npm config set cache /app/.npm-cache
