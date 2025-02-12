@@ -5,7 +5,9 @@ function App() {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    fetch("/service/")
+    const backendUrl = process.env.BACKEND_URL || "http://localhost:5000";
+
+    fetch(`${backendUrl}`)
       .then(res => res.json())
       .then(data => setMessage(data.message))
       .catch(err => setMessage("Error connecting to backend", err));
