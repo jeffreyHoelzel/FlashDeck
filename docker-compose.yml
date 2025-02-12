@@ -5,11 +5,12 @@ services:
     container_name: web
     build:
       context: ./web
-      dockerfile: dockerfile
+      dockerfile: Dockerfile
     ports:
       - "3000:3000"
     environment:
       - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
       - REACT_APP_BACKEND_URL=http://backend:5000
       - NODE_OPTIONS=--openssl-legacy-provider
     volumes:
@@ -24,13 +25,13 @@ services:
   backend:
     container_name: service
     build:
-      - context: ./service
-      - dockerfile: Dockerfile
+      context: ./service
+      dockerfile: Dockerfile
     ports:
       - "5000:5000"
     environment:
       - FLASK_ENV=development
-    volumns:
+    volumes:
       - ./service:/app
     networks:
       - flash_deck_shared_network
