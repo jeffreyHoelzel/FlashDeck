@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Header from "./components/Header";
+import Main from "./components/Main";
+import Footer from "./components/Footer";
+
+import "./styles/home.css";
 
 function App() {
   const [message, setMessage] = useState("");
@@ -14,7 +19,15 @@ function App() {
   }, []);
 
   return (
-    <h1>{message}</h1>
+    <Router>
+      <div>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Main />} />
+        </Routes>
+        <Footer />
+      </div>
+    </Router>
   )
 }
 
