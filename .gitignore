@@ -2,3 +2,4 @@ service/node_modules
 service/__pycache__/
 web/node_modules
 web/.npm-cache
+service/Utilities/__pycache__

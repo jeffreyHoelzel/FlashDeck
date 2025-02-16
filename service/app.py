@@ -1,9 +1,22 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
+# Classes needed to run FlashDeck
+from Utilities.card import Card
+from Utilities.deck import Deck
+from Utilities.quiz import Quiz
+from Utilities.database import db, DATABASE_URL
 
 app = Flask(__name__)
 CORS(app)
+
+app.config["SQLALCHEMY_TRACK_NOTIFICATIONS"] = False
+app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
+
+db.init_app(app)
+
+with app.app_context():
+    db.create_all()
 
 # testing
 @app.route("/", methods=["GET", "POST"])
