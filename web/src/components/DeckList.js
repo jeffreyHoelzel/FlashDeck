@@ -25,6 +25,22 @@ function DeckList() {
     fetchDecks();
   }, []);
 
+  const handleDeckDelete = async (deckId) => {
+    try {
+      const response = await fetch(`${backendUrl}/delete_deck/${deckId}`, {
+        method: "DELETE",        
+      });
+
+      if (response.ok) {
+        setDecks(decks.filter((deck) => deck.id !== deckId));
+      } else {
+        setMessage("Failed to delete deck.")
+      }
+    } catch (error) {
+      setMessage("Failed to connect to backend.")
+    }
+  }
+
   return (
     <div>
       <h2>Select a Deck to Edit</h2>
@@ -36,6 +52,9 @@ function DeckList() {
             <Link to={`/edit_deck/${deck.id}`}>
               <button>Edit</button>
             </Link>
+            <button type="button" onClick={() => handleDeckDelete(deck.id)}>
+              Delete
+            </button>
           </li>
         ))}
       </ul>

@@ -46,7 +46,7 @@ function Quiz() {
     setShowAnswer(false);
   };
 
-  const handleGoBack = () => navigate("/select_quiz");
+  const handleGoBack = () => navigate("/quiz_deck");
 
   return (
     <div style={{ textAlign: "center", padding: "20px" }}>

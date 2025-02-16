@@ -12,17 +12,6 @@ import Quiz from "./components/Quiz";
 import SelectQuizDeck from "./components/SelectQuizDeck";
 
 function App() {
-  const [message, setMessage] = useState("");
-
-  useEffect(() => {
-    const backendUrl = process.env.BACKEND_URL || "http://localhost:5000";
-
-    fetch(`${backendUrl}`)
-      .then(res => res.json())
-      .then(data => setMessage(data.message))
-      .catch(err => setMessage("Error connecting to backend", err));
-  }, []);
-
   return (
     <Router>
       <div>

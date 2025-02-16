@@ -11,18 +11,13 @@ from Utilities.database import db, DATABASE_URL
 app = Flask(__name__)
 CORS(app)
 
-app.config["SQLALCHEMY_TRACK_NOTIFICATIONS"] = False
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
 
 db.init_app(app)
 
 with app.app_context():
     db.create_all()
-
-# testing
-@app.route("/", methods=["GET", "POST"])
-def test():
-    return jsonify({"message": "Hello, world!"}), 200
 
 @app.route("/create_new_deck", methods=["POST"])
 def create_deck():
@@ -40,9 +35,6 @@ def create_deck():
     new_deck = Deck(name=data["name"])
     db.session.add(new_deck)
     db.session.commit()
-
-    # Add cards to the deck
-    from Utilities.card import Card
 
     for card_data in data["cards"]:
         question = card_data.get("question")
@@ -72,8 +64,6 @@ def edit_deck(deck_id):
         deck.name = data["name"]
 
     if "cards" in data:
-        from Utilities.card import Card
-
         for card_data in data["cards"]:
             card_id = card_data.get("id")
             question = card_data.get("question")
@@ -91,6 +81,24 @@ def edit_deck(deck_id):
     db.session.commit()
     return jsonify({"message": "Deck updated successfully!"}), 200
 
+@app.route("/delete_deck/<int:deck_id>", methods=["DELETE"])
+def delete_deck(deck_id):
+    try:
+        deck = Deck.query.get(deck_id)
+
+        if not deck:
+            return jsonify({"error": "Deck not found."}), 404
+        
+        db.session.delete(deck)
+        db.session.commit()
+
+        return jsonify({"message": "Deck deleted successfully!"}), 200
+    
+    except Exception as e:
+        db.session.rollback()
+        print(f"Error deleting deck: {e}")
+        return jsonify({"error": "Internal server error."}), 500
+
 @app.route("/get_all_decks", methods=["GET"])
 def get_all_decks():
     decks = Deck.query.all()
@@ -105,8 +113,6 @@ def get_deck(deck_id):
     if not deck:
         return jsonify({"error": "Deck not found."}), 404
 
-    from Utilities.card import Card
-
     cards = [{"id": card.id, "question": card.question, "answer": card.answer} for card in deck.cards]
 
     return jsonify({"id": deck.id, "name": deck.name, "cards": cards}), 200
@@ -117,8 +123,6 @@ def start_quiz(deck_id):
 
     if not deck:
         return jsonify({"error": "Deck not found."}), 404
-
-    from Utilities.card import Card
 
     flashcards = [{"id": card.id, "question": card.question, "answer": card.answer} for card in deck.cards]
 
