@@ -1,0 +1,36 @@
+.deck-list-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 2rem;
+  border: 1px solid whitesmoke;
+}
+
+.deck-list-container h2 {
+  margin-bottom: 15px;
+}
+
+.deck-list-container ul {
+  list-style: none;
+  font-size: 1.5rem;
+}
+
+.deck-list-container>ul>li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.li-container {
+  display: flex;
+  gap: 1rem;
+}
+
+.edit-button,
+.delete-button {
+  padding: 0.5rem 1rem;
+  background-color: whitesmoke;
+  color: gray;
+  border: none;
+  cursor: pointer;
+}

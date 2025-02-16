@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import "../styles/editdeck.css";
 
 function EditDeckForm() {
   const { deckId } = useParams();
@@ -67,11 +68,12 @@ function EditDeckForm() {
   };
 
   return (
-    <div>
+    <div className="edit-deck-container">
       <h2>Edit Deck</h2>
-      {message && <p>{message}</p>}
+      {message && <p className="result-message">{message}</p>}
       <form onSubmit={handleSubmit}>
         <input
+          className="edit-input"
           type="text"
           value={deckName}
           onChange={handleDeckNameChange}
@@ -81,8 +83,9 @@ function EditDeckForm() {
 
         <h3>Flashcards:</h3>
         {cards.map((card, index) => (
-          <div key={index} style={{ marginBottom: "1rem" }}>
+          <div className="second-input-container" key={index} style={{ marginBottom: "1rem" }}>
             <input
+              className="edit-input"
               type="text"
               placeholder={`Question ${index + 1}`}
               value={card.question}
@@ -90,23 +93,24 @@ function EditDeckForm() {
               required
             />
             <input
+              className="edit-input"
               type="text"
               placeholder={`Answer ${index + 1}`}
               value={card.answer}
               onChange={(e) => handleCardChange(index, "answer", e.target.value)}
               required
             />
-            <button type="button" onClick={() => handleRemoveCard(index)}>
+            <button className="edit-button" type="button" onClick={() => handleRemoveCard(index)}>
               Remove Card
             </button>
           </div>
         ))}
 
-        <button type="button" onClick={handleAddCard}>
+        <button className="edit-button" type="button" onClick={handleAddCard}>
           Add Another Card
         </button>
 
-        <button type="submit">Save Changes</button>
+        <button className="edit-button" type="submit">Save Changes</button>
       </form>
     </div>
   );

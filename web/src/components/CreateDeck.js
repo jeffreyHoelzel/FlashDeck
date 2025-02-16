@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../styles/createdeck.css";
 
 function CreateDeckForm() {
   const [deckName, setDeckName] = useState("");
@@ -50,10 +51,11 @@ function CreateDeckForm() {
   };
 
   return (
-    <div>
+    <div className="form-container">
       <h2>Create a New Deck</h2>
       <form onSubmit={handleSubmit}>
         <input
+          className="deck-name-input"
           type="text"
           placeholder="Enter deck name"
           value={deckName}
@@ -63,7 +65,7 @@ function CreateDeckForm() {
 
         <h3>Flashcards:</h3>
         {cards.map((card, index) => (
-          <div key={index} style={{ marginBottom: "1rem" }}>
+          <div key={index} className="card-info-container">
             <input
               type="text"
               placeholder={`Question ${index + 1}`}
@@ -91,7 +93,7 @@ function CreateDeckForm() {
         <button type="submit">Create Deck</button>
       </form>
 
-      {message && <p>{message}</p>}
+      {message && <p className="result-message">{message}</p>}
     </div>
   );
 }

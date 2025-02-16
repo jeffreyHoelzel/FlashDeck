@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import "../styles/quiz.css";
 
 function SelectQuizDeck() {
   const [decks, setDecks] = useState([]);
@@ -27,9 +28,9 @@ function SelectQuizDeck() {
   }, []);
 
   return (
-    <div>
+    <div className="quiz-deck-container">
       <h2>Select a Deck for Your Quiz</h2>
-      {message && <p>{message}</p>}
+      {message && <p className="result-message">{message}</p>}
       <ul>
         {decks.map((deck) => (
           <li key={deck.id}>
@@ -40,7 +41,7 @@ function SelectQuizDeck() {
           </li>
         ))}
       </ul>
-      <button onClick={() => navigate("/")}>Back to Home</button>
+      <button className="send-home" onClick={() => navigate("/")}>Back to Home</button>
     </div>
   );
 }

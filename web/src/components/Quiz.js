@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import "../styles/quiz.css";
 
 function Quiz() {
   const { deckId } = useParams();
@@ -75,23 +76,23 @@ function Quiz() {
             {showAnswer ? flashcards[currentIndex].answer : flashcards[currentIndex].question}
           </div>
 
-          <button onClick={handlePrev} disabled={currentIndex === 0} style={{ marginRight: "10px" }}>
+          <button className="selector" onClick={handlePrev} disabled={currentIndex === 0} style={{ marginRight: "10px" }}>
             Previous
           </button>
-          <button onClick={handleNext} style={{ marginRight: "10px" }}>
+          <button className="selector" onClick={handleNext} style={{ marginRight: "10px" }}>
             Next
           </button>
 
-          <button onClick={handleRestart} style={{ marginRight: "10px" }}>
+          <button className="selector" onClick={handleRestart} style={{ marginRight: "10px" }}>
             Restart Quiz
           </button>
 
-          <button onClick={handleGoBack}>
+          <button className="selector" onClick={handleGoBack}>
             Go Back
           </button>
         </div>
       ) : (
-        <p>No flashcards available.</p>
+        <p className="result-message">No flashcards available.</p>
       )}
     </div>
   );
