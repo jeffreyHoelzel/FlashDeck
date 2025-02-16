@@ -125,7 +125,6 @@ def start_quiz(deck_id):
     if not flashcards:
         return jsonify({"error": "This deck has no flashcards."}), 400
 
-    # Shuffle the flashcards to randomize the quiz order
     random.shuffle(flashcards)
 
     return jsonify({"deck_id": deck.id, "deck_name": deck.name, "flashcards": flashcards}), 200

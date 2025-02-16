@@ -9,7 +9,6 @@ function EditDeckForm() {
 
   const backendUrl = process.env.BACKEND_URL || "http://localhost:5000";
 
-  // Fetch existing deck details
   useEffect(() => {
     const fetchDeck = async () => {
       try {
@@ -29,28 +28,23 @@ function EditDeckForm() {
     fetchDeck();
   }, [deckId]);
 
-  // Handle deck name change
   const handleDeckNameChange = (e) => setDeckName(e.target.value);
 
-  // Handle card input changes
   const handleCardChange = (index, field, value) => {
     const updatedCards = [...cards];
     updatedCards[index][field] = value;
     setCards(updatedCards);
   };
 
-  // Add a new flashcard
   const handleAddCard = () => {
     setCards([...cards, { question: "", answer: "" }]);
   };
 
-  // Remove a flashcard
   const handleRemoveCard = (index) => {
     const updatedCards = cards.filter((_, i) => i !== index);
     setCards(updatedCards);
   };
 
-  // Submit the updated deck
   const handleSubmit = async (e) => {
     e.preventDefault();
 

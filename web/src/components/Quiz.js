@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 function Quiz() {
-  const { deckId } = useParams(); // Get the deck ID from the URL
+  const { deckId } = useParams();
   const [flashcards, setFlashcards] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showAnswer, setShowAnswer] = useState(false);
@@ -11,7 +11,6 @@ function Quiz() {
 
   const backendUrl = process.env.BACKEND_URL || "http://localhost:5000";
 
-  // Fetch flashcards when the component loads
   useEffect(() => {
     const fetchFlashcards = async () => {
       try {
@@ -30,28 +29,23 @@ function Quiz() {
     fetchFlashcards();
   }, [deckId]);
 
-  // Handle flipping card
   const handleFlip = () => setShowAnswer(!showAnswer);
 
-  // Handle navigating to the next card
   const handleNext = () => {
     setShowAnswer(false);
     setCurrentIndex((prevIndex) => (prevIndex + 1) % flashcards.length);
   };
 
-  // Handle navigating to the previous card
   const handlePrev = () => {
     setShowAnswer(false);
     setCurrentIndex((prevIndex) => (prevIndex - 1 + flashcards.length) % flashcards.length);
   };
 
-  // Restart Quiz
   const handleRestart = () => {
     setCurrentIndex(0);
     setShowAnswer(false);
   };
 
-  // Go back to deck selection
   const handleGoBack = () => navigate("/select_quiz");
 
   return (
@@ -63,7 +57,6 @@ function Quiz() {
         <div>
           <h3>Flashcard {currentIndex + 1} of {flashcards.length}</h3>
 
-          {/* Flashcard display */}
           <div 
             onClick={handleFlip} 
             style={{
@@ -82,7 +75,6 @@ function Quiz() {
             {showAnswer ? flashcards[currentIndex].answer : flashcards[currentIndex].question}
           </div>
 
-          {/* Navigation Buttons */}
           <button onClick={handlePrev} disabled={currentIndex === 0} style={{ marginRight: "10px" }}>
             Previous
           </button>

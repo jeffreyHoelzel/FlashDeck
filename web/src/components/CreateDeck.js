@@ -5,26 +5,21 @@ function CreateDeckForm() {
   const [cards, setCards] = useState([{ question: "", answer: "" }]);
   const [message, setMessage] = useState("");
 
-  // Handle deck name input change
   const handleDeckNameChange = (e) => setDeckName(e.target.value);
 
-  // Handle card input changes
   const handleCardChange = (index, field, value) => {
     const updatedCards = [...cards];
     updatedCards[index][field] = value;
     setCards(updatedCards);
   };
 
-  // Add a new card
   const handleAddCard = () => setCards([...cards, { question: "", answer: "" }]);
 
-  // Remove a card
   const handleRemoveCard = (index) => {
     const updatedCards = cards.filter((_, i) => i !== index);
     setCards(updatedCards);
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
