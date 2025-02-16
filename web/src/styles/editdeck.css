@@ -1,0 +1,38 @@
+.edit-deck-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 2rem;
+  border: 1px solid whitesmoke;
+}
+
+.result-message {
+  color: whitesmoke;
+}
+
+.edit-deck-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.second-input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.edit-input {
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: none;
+  background-color: whitesmoke;
+  color: gray;
+}
+
+.edit-button {
+  padding: 0.5rem 1rem;
+  color: gray;
+  background-color: whitesmoke;
+  border: none;
+  cursor: pointer;
+}

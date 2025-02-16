@@ -1,0 +1,59 @@
+.form-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 2rem;
+  border: 1px solid whitesmoke;
+}
+
+.form-container h2 {
+  margin-bottom: 15px;
+}
+
+.form-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.deck-name-input {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: none;
+  margin-bottom: 20px;
+}
+
+.card-info-container {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.card-info-container input {
+  flex: 1;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: none;
+}
+
+.card-info-container button {
+  font-size: 1rem;
+  background-color: whitesmoke;
+  border: none;
+  cursor: pointer;
+  color: gray;
+  height: 75%;
+}
+
+.form-container>form>button {
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: none;
+  color: gray;
+  cursor: pointer;
+  background-color: whitesmoke;
+}
+
+.result-message {
+  margin-top: 1rem;
+  color: whitesmoke
+}

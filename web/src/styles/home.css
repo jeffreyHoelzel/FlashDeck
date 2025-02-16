@@ -1,0 +1,115 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+  border: none;
+}
+
+body {
+  color: whitesmoke;
+  background: #192841;
+  min-height: 100vh;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  background-color: black
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+}
+
+.logo-container {
+  width: 100px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.options-container {
+  display: flex;
+  width: 100%;
+  height: 45px;
+  justify-content: space-between;
+  max-width: 800px;
+}
+
+.option {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.options-container button {
+  margin: 0 1rem;
+}
+
+.logo-container button, 
+.options-container button {
+  background-color: whitesmoke;
+  color: #192841;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+
+.logo-container button:hover, 
+.options-container button:hover {
+  background-color: #23395d;
+  color: whitesmoke;
+}
+
+.main-container {
+  border: 2px solid white;
+  max-width: 800px;
+  width: 100%;
+  margin-bottom: 45px;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+main h1 {
+  font-size: 4.5rem;
+}
+
+main p {
+  font-size: 1.10rem;
+}
+
+main h1, main p {
+  padding: 20px;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: black;
+  border-top: 2px solid whitesmoke;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  color: whitesmoke;
+}

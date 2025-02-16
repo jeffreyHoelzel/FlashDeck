@@ -1,0 +1,41 @@
+.quiz-deck-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 2rem;
+  border: 1px solid whitesmoke;
+}
+
+.result-message {
+  color: whitesmoke;
+}
+
+.quiz-deck-container h2 {
+  margin-bottom: 15px;
+}
+
+.quiz-deck-container ul {
+  list-style: none;
+  padding: 0;
+}
+
+.quiz-deck-container>ul>li {
+  display: flex;
+  margin-bottom: 1rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.quiz-deck-container>ul>li>button, 
+.send-home, 
+.selector {
+  padding: 0.5rem 1rem;
+  background-color: whitesmoke;
+  color: gray;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.selector {
+  color: black;
+}
