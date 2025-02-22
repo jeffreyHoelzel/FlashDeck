@@ -4,3 +4,4 @@ web/node_modules
 web/.npm-cache
 service/Utilities/__pycache__
 service/flashdeck.db
+flashdeck.db

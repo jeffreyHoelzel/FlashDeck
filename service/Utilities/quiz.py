@@ -10,10 +10,9 @@ class Quiz(db.Model):
 
     decks = relationship("Deck", secondary=quiz_deck_relationship, back_populates="quizzes", cascade="all, delete")
 
-    def __init__(self, name, decks=None):
+    def __init__(self, name, decks=[]):
         self.name = name
-        if decks:
-            self.decks = decks
+        self.decks = decks
     
     def change_name(self, new_name):
         self.name = new_name

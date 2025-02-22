@@ -32,23 +32,27 @@ def create_deck():
         return jsonify({"error": "A deck with this name already exists."}), 409
 
     # Create a new deck
-    new_deck = Deck(name=data["name"])
-    db.session.add(new_deck)
-    db.session.commit()
+    try:
+        new_deck = Deck(name=data["name"])
+        db.session.add(new_deck)
+        db.session.commit()
 
-    for card_data in data["cards"]:
-        question = card_data.get("question")
-        answer = card_data.get("answer")
-        if question and answer:
-            new_card = Card(question=question, answer=answer, deck_id=new_deck.id)
-            db.session.add(new_card)
+        for card_data in data["cards"]:
+            question = card_data.get("question")
+            answer = card_data.get("answer")
+            if question and answer:
+                new_card = Card(question=question, answer=answer, deck_id=new_deck.id)
+                db.session.add(new_card)
 
-    db.session.commit()
+        db.session.commit()
 
-    return jsonify({"message": "Deck created successfully!", "deck_id": new_deck.id}), 201
+        return jsonify({"message": "Deck created successfully!", "deck_id": new_deck.id}), 201
+    
+    except Exception as db_error:
+        db.session.rollback()
+        return jsonify({"error": f"An occured trying to add a new deck: {db_error}."}), 500
 
 
-#TODO: Add a way to delete entire decks
 @app.route("/edit_existing_deck/<int:deck_id>", methods=["PUT"])
 def edit_deck(deck_id):
     data = request.get_json()
@@ -75,8 +79,13 @@ def edit_deck(deck_id):
                     existing_card.question = question
                     existing_card.answer = answer
             else:
-                new_card = Card(question=question, answer=answer, deck_id=deck.id)
-                db.session.add(new_card)
+                try:
+                    new_card = Card(question=question, answer=answer, deck_id=deck.id)
+                    db.session.add(new_card)
+                
+                except Exception as db_error:
+                    db.session.rollback()
+                    return jsonify({"error": f"An occured trying to add a new deck: {db_error}."}), 500
 
     db.session.commit()
     return jsonify({"message": "Deck updated successfully!"}), 200

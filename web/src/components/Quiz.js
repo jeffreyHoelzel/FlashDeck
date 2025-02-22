@@ -50,7 +50,7 @@ function Quiz() {
   const handleGoBack = () => navigate("/quiz_deck");
 
   return (
-    <div style={{ textAlign: "center", padding: "20px" }}>
+    <div classsName="quiz-container">
       <h2>Quiz Mode</h2>
       {message && <p>{message}</p>}
       
@@ -58,38 +58,26 @@ function Quiz() {
         <div>
           <h3>Flashcard {currentIndex + 1} of {flashcards.length}</h3>
 
-          <div 
-            onClick={handleFlip} 
-            style={{
-              cursor: "pointer",
-              padding: "40px",
-              border: "2px solid black",
-              borderRadius: "10px",
-              textAlign: "center",
-              width: "300px",
-              margin: "20px auto",
-              backgroundColor: "#f9f9f9",
-              fontSize: "1.2rem",
-              color: "black"
-            }}
-          >
+          <div onClick={handleFlip} className="inner-flashcard">
             {showAnswer ? flashcards[currentIndex].answer : flashcards[currentIndex].question}
           </div>
 
-          <button className="selector" onClick={handlePrev} disabled={currentIndex === 0} style={{ marginRight: "10px" }}>
-            Previous
-          </button>
-          <button className="selector" onClick={handleNext} style={{ marginRight: "10px" }}>
-            Next
-          </button>
+          <div className="selector-container">
+            <button className="selector" onClick={handlePrev} disabled={currentIndex === 0} style={{ marginRight: "10px" }}>
+              Previous
+            </button>
+            <button className="selector" onClick={handleNext} style={{ marginRight: "10px" }}>
+              Next
+            </button>
 
-          <button className="selector" onClick={handleRestart} style={{ marginRight: "10px" }}>
-            Restart Quiz
-          </button>
+            <button className="selector" onClick={handleRestart} style={{ marginRight: "10px" }}>
+              Restart Quiz
+            </button>
 
-          <button className="selector" onClick={handleGoBack}>
-            Go Back
-          </button>
+            <button className="selector" onClick={handleGoBack}>
+              Go Back
+            </button>
+          </div>
         </div>
       ) : (
         <p className="result-message">No flashcards available.</p>
