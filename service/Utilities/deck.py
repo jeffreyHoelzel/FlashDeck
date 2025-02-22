@@ -2,6 +2,15 @@ from .database import db
 from sqlalchemy.orm import relationship
 from .quiz_deck_relationship import quiz_deck_relationship
 
+"""
+    Deck class for handling database operations involving many cards.
+
+    Many decks compose a quiz. The Deck class is designed to store
+    many cards.
+
+    Deck should only be used in conjunction with SQLAlchemy SQLite
+    database operations.
+"""
 class Deck(db.Model):
     __tablename__ = "decks"
 

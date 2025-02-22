@@ -1,7 +1,16 @@
 from .database import db
 from sqlalchemy.orm import relationship
-# TODO: finish db set-up using sqlalchemy
 
+"""
+    Card class for handling database operations.
+
+    Many cards compose a deck. The Card class is designed to store
+    a question, answer, and the deck id for the deck this card is 
+    associated with.
+
+    Card should only be used in conjunction with SQLAlchemy SQLite
+    database operations.
+"""
 class Card(db.Model):
     __tablename__ = "cards"
 

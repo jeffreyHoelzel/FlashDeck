@@ -2,6 +2,14 @@ from .database import db
 from sqlalchemy.orm import relationship
 from .quiz_deck_relationship import quiz_deck_relationship
 
+"""
+    Quiz class for handling database operations involving many decks.
+
+    The Quiz class is designed to store many decks.
+
+    Quiz should only be used in conjunction with SQLAlchemy SQLite
+    database operations.
+"""
 class Quiz(db.Model):
     __tablename__ = "quizzes"
 
