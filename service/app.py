@@ -31,10 +31,13 @@ def create_deck():
     if existing_deck:
         return jsonify({"error": "A deck with this name already exists."}), 409
 
-    # Create a new deck
+    # Create a new deck and quiz
     try:
         new_deck = Deck(name=data["name"])
         db.session.add(new_deck)
+
+        new_quiz = Quiz(new_deck.name, [new_deck])
+        db.session.add(new_quiz)
         db.session.commit()
 
         for card_data in data["cards"]:
@@ -61,11 +64,13 @@ def edit_deck(deck_id):
         return jsonify({"error": "No data provided."}), 400
 
     deck = Deck.query.get(deck_id)
-    if not deck:
-        return jsonify({"error": "Deck not found."}), 404
+    quiz = Quiz.query.get(deck_id)
+    if not deck or not quiz:
+        return jsonify({"error": "Deck and quiz not found."}), 404
 
     if "name" in data:
         deck.name = data["name"]
+        quiz.name = data["name"]
 
     if "cards" in data:
         for card_data in data["cards"]:
