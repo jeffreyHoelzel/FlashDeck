@@ -1,6 +1,5 @@
-from .database import db
 from sqlalchemy.orm import relationship
-# TODO: finish db set-up using sqlalchemy
+from .database import db
 
 class Card(db.Model):
     __tablename__ = "cards"

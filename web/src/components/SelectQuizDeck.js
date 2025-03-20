@@ -7,12 +7,12 @@ function SelectQuizDeck() {
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
-  const backendUrl = process.env.BACKEND_URL || "http://localhost:5000";
+  const backendUrl = process.env.REACT_APP_API_GATEWAY_URL || "http://api-gateway:8000";
 
   useEffect(() => {
     const fetchDecks = async () => {
       try {
-        const response = await fetch(`${backendUrl}/get_all_decks`);
+        const response = await fetch(`${backendUrl}/api/get_all_decks`);
         if (response.ok) {
           const data = await response.json();
           setDecks(data.decks);

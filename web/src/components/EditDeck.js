@@ -8,12 +8,12 @@ function EditDeckForm() {
   const [cards, setCards] = useState([]);
   const [message, setMessage] = useState("");
 
-  const backendUrl = process.env.BACKEND_URL || "http://localhost:5000";
+  const backendUrl = process.env.REACT_APP_API_GATEWAY_URL || "http://api-gateway:8000";
 
   useEffect(() => {
     const fetchDeck = async () => {
       try {
-        const response = await fetch(`${backendUrl}/get_deck/${deckId}`);
+        const response = await fetch(`${backendUrl}/api/get_deck/${deckId}`);
         if (response.ok) {
           const data = await response.json();
           setDeckName(data.name);
@@ -50,7 +50,7 @@ function EditDeckForm() {
     e.preventDefault();
 
     try {
-      const response = await fetch(`${backendUrl}/edit_existing_deck/${deckId}`, {
+      const response = await fetch(`${backendUrl}/api/edit_existing_deck/${deckId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name: deckName, cards }),

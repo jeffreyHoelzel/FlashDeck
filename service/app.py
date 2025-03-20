@@ -19,7 +19,7 @@ db.init_app(app)
 with app.app_context():
     db.create_all()
 
-@app.route("/create_new_deck", methods=["POST"])
+@app.route("/api/create_new_deck", methods=["POST"])
 def create_deck():
     data = request.get_json()
 
@@ -48,8 +48,7 @@ def create_deck():
     return jsonify({"message": "Deck created successfully!", "deck_id": new_deck.id}), 201
 
 
-#TODO: Add a way to delete entire decks
-@app.route("/edit_existing_deck/<int:deck_id>", methods=["PUT"])
+@app.route("/api/edit_existing_deck/<int:deck_id>", methods=["PUT"])
 def edit_deck(deck_id):
     data = request.get_json()
 
@@ -81,7 +80,7 @@ def edit_deck(deck_id):
     db.session.commit()
     return jsonify({"message": "Deck updated successfully!"}), 200
 
-@app.route("/delete_deck/<int:deck_id>", methods=["DELETE"])
+@app.route("/api/delete_deck/<int:deck_id>", methods=["DELETE"])
 def delete_deck(deck_id):
     try:
         deck = Deck.query.get(deck_id)
@@ -99,14 +98,14 @@ def delete_deck(deck_id):
         print(f"Error deleting deck: {e}")
         return jsonify({"error": "Internal server error."}), 500
 
-@app.route("/get_all_decks", methods=["GET"])
+@app.route("/api/get_all_decks", methods=["GET"])
 def get_all_decks():
     decks = Deck.query.all()
     deck_list = [{"id": deck.id, "name": deck.name} for deck in decks]
 
     return jsonify({"decks": deck_list}), 200
 
-@app.route("/get_deck/<int:deck_id>", methods=["GET"])
+@app.route("/api/get_deck/<int:deck_id>", methods=["GET"])
 def get_deck(deck_id):
     deck = Deck.query.get(deck_id)
 
@@ -117,7 +116,7 @@ def get_deck(deck_id):
 
     return jsonify({"id": deck.id, "name": deck.name, "cards": cards}), 200
 
-@app.route("/quiz_deck/<int:deck_id>", methods=["GET"])
+@app.route("/api/quiz_deck/<int:deck_id>", methods=["GET"])
 def start_quiz(deck_id):
     deck = Deck.query.get(deck_id)
 

@@ -1,5 +1,3 @@
-version: "3"
-
 services:
   frontend:
     container_name: web
@@ -11,13 +9,14 @@ services:
     environment:
       - CHOKIDAR_USEPOLLING=true
       - WATCHPACK_POLLING=true
-      - REACT_APP_BACKEND_URL=http://backend:5000
       - NODE_OPTIONS=--openssl-legacy-provider
+      - REACT_APP_API_GATEWAY_URL=http://api-gateway:8000
     volumes:
       - ./web:/app
       - /app/node_modules
       - ./web/src/styles:/app/src/styles
     depends_on:
+      - api-gateway
       - backend
     networks:
       - flash_deck_shared_network
@@ -29,12 +28,24 @@ services:
       dockerfile: Dockerfile
     ports:
       - "5000:5000"
-    environment:
-      - FLASK_ENV=development
     volumes:
       - ./service:/app
     networks:
       - flash_deck_shared_network
+
+  api-gateway:
+    container_name: api_gateway
+    build:
+      context: ./api_gateway
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./api_gateway:/app
+    networks:
+      - flash_deck_shared_network
+    depends_on:
+      - backend
 
 networks:
   flash_deck_shared_network:

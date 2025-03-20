@@ -10,12 +10,12 @@ function Quiz() {
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
-  const backendUrl = process.env.BACKEND_URL || "http://localhost:5000";
+  const backendUrl = process.env.REACT_APP_API_GATEWAY_URL || "http://api-gateway:8000";
 
   useEffect(() => {
     const fetchFlashcards = async () => {
       try {
-        const response = await fetch(`${backendUrl}/quiz_deck/${deckId}`);
+        const response = await fetch(`${backendUrl}/api/quiz_deck/${deckId}`);
         if (response.ok) {
           const data = await response.json();
           setFlashcards(data.flashcards);
