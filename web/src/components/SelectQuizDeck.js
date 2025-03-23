@@ -12,7 +12,7 @@ function SelectQuizDeck() {
   useEffect(() => {
     const fetchDecks = async () => {
       try {
-        const response = await fetch(`${backendUrl}/api/get_all_decks`);
+        const response = await fetch(`${backendUrl}/api/deck/get_all_decks`);
         if (response.ok) {
           const data = await response.json();
           setDecks(data.decks);

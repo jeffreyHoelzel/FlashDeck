@@ -17,19 +17,34 @@ services:
       - ./web/src/styles:/app/src/styles
     depends_on:
       - api-gateway
-      - backend
+      - deck-service
+      - quiz-service
     networks:
       - flash_deck_shared_network
 
-  backend:
-    container_name: service
+  deck-service:
+    container_name: deck_service
     build:
-      context: ./service
+      context: ./services/deck_service
       dockerfile: Dockerfile
     ports:
-      - "5000:5000"
+      - "5001:5001"
     volumes:
-      - ./service:/app
+      - "./services/deck_service:/app"
+      - flash_deck_db_data:/app/db
+    networks:
+      - flash_deck_shared_network
+
+  quiz-service:
+    container_name: quiz_service
+    build:
+      context: ./services/quiz_service
+      dockerfile: Dockerfile
+    ports:
+      - "5002:5002"
+    volumes:
+      - "./services/quiz_service:/app"
+      - flash_deck_db_data:/app/db
     networks:
       - flash_deck_shared_network
 
@@ -45,7 +60,11 @@ services:
     networks:
       - flash_deck_shared_network
     depends_on:
-      - backend
+      - deck-service
+      - quiz-service
+
+volumes:
+  flash_deck_db_data:
 
 networks:
   flash_deck_shared_network:

@@ -5,11 +5,17 @@ import requests
 app = Flask(__name__)
 CORS(app)
 
-SERVICE_URL = "http://backend:5000"
+SERVICES = {
+    "deck": "http://deck-service:5001", 
+    "quiz": "http://quiz-service:5002"
+}
 
-@app.route("/api/<path:path>", methods=["GET", "POST", "PUT", "DELETE"])
-def forward_request(path):
-    url = f"{SERVICE_URL}/{path}"
+@app.route("/api/<service>/<path:path>", methods=["GET", "POST", "PUT", "DELETE"])
+def forward_request(service, path):
+    if service not in SERVICES:
+        return jsonify({"error", "400 Bad Request"}), 400
+    
+    url = f"{SERVICES[service]}/{service}/{path}"
 
     response = requests.request(
         method=request.method, 

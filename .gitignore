@@ -1,6 +1,10 @@
-service/node_modules
-service/__pycache__/
+services/deck_service/node_modules
+services/deck_service/__pycache__/
+services/quiz_service/node_modules
+services/quiz_service/__pycache__/
 web/node_modules
 web/.npm-cache
-service/Utilities/__pycache__
-service/flashdeck.db
+services/deck_service/Utilities/__pycache__
+services/quiz_service/Utilities/__pycache__
+services/deck_service/db
+services/quiz_service/db
