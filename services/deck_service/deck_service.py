@@ -1,6 +1,5 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-import random
 
 # Classes needed to run FlashDeck
 from Utilities.card import Card
@@ -19,7 +18,7 @@ db.init_app(app)
 with app.app_context():
     db.create_all()
 
-@app.route("/create_new_deck", methods=["POST"])
+@app.route("/deck/create_new_deck", methods=["POST"])
 def create_deck():
     data = request.get_json()
 
@@ -48,8 +47,7 @@ def create_deck():
     return jsonify({"message": "Deck created successfully!", "deck_id": new_deck.id}), 201
 
 
-#TODO: Add a way to delete entire decks
-@app.route("/edit_existing_deck/<int:deck_id>", methods=["PUT"])
+@app.route("/deck/edit_existing_deck/<int:deck_id>", methods=["PUT"])
 def edit_deck(deck_id):
     data = request.get_json()
 
@@ -81,7 +79,7 @@ def edit_deck(deck_id):
     db.session.commit()
     return jsonify({"message": "Deck updated successfully!"}), 200
 
-@app.route("/delete_deck/<int:deck_id>", methods=["DELETE"])
+@app.route("/deck/delete_deck/<int:deck_id>", methods=["DELETE"])
 def delete_deck(deck_id):
     try:
         deck = Deck.query.get(deck_id)
@@ -99,14 +97,14 @@ def delete_deck(deck_id):
         print(f"Error deleting deck: {e}")
         return jsonify({"error": "Internal server error."}), 500
 
-@app.route("/get_all_decks", methods=["GET"])
+@app.route("/deck/get_all_decks", methods=["GET"])
 def get_all_decks():
     decks = Deck.query.all()
     deck_list = [{"id": deck.id, "name": deck.name} for deck in decks]
 
     return jsonify({"decks": deck_list}), 200
 
-@app.route("/get_deck/<int:deck_id>", methods=["GET"])
+@app.route("/deck/get_deck/<int:deck_id>", methods=["GET"])
 def get_deck(deck_id):
     deck = Deck.query.get(deck_id)
 
@@ -117,22 +115,6 @@ def get_deck(deck_id):
 
     return jsonify({"id": deck.id, "name": deck.name, "cards": cards}), 200
 
-@app.route("/quiz_deck/<int:deck_id>", methods=["GET"])
-def start_quiz(deck_id):
-    deck = Deck.query.get(deck_id)
-
-    if not deck:
-        return jsonify({"error": "Deck not found."}), 404
-
-    flashcards = [{"id": card.id, "question": card.question, "answer": card.answer} for card in deck.cards]
-
-    if not flashcards:
-        return jsonify({"error": "This deck has no flashcards."}), 400
-
-    random.shuffle(flashcards)
-
-    return jsonify({"deck_id": deck.id, "deck_name": deck.name, "flashcards": flashcards}), 200
-
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(host="0.0.0.0", port=5001, debug=True)

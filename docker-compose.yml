@@ -1,5 +1,3 @@
-version: "3"
-
 services:
   frontend:
     container_name: web
@@ -11,30 +9,62 @@ services:
     environment:
       - CHOKIDAR_USEPOLLING=true
       - WATCHPACK_POLLING=true
-      - REACT_APP_BACKEND_URL=http://backend:5000
       - NODE_OPTIONS=--openssl-legacy-provider
+      - REACT_APP_API_GATEWAY_URL=http://localhost:8000
     volumes:
       - ./web:/app
       - /app/node_modules
       - ./web/src/styles:/app/src/styles
     depends_on:
-      - backend
+      - api-gateway
+      - deck-service
+      - quiz-service
     networks:
       - flash_deck_shared_network
 
-  backend:
-    container_name: service
+  deck-service:
+    container_name: deck_service
     build:
-      context: ./service
+      context: ./services/deck_service
       dockerfile: Dockerfile
     ports:
-      - "5000:5000"
-    environment:
-      - FLASK_ENV=development
+      - "5001:5001"
     volumes:
-      - ./service:/app
+      - "./services/deck_service:/app"
+      - flash_deck_db_data:/app/db
     networks:
       - flash_deck_shared_network
+
+  quiz-service:
+    container_name: quiz_service
+    build:
+      context: ./services/quiz_service
+      dockerfile: Dockerfile
+    ports:
+      - "5002:5002"
+    volumes:
+      - "./services/quiz_service:/app"
+      - flash_deck_db_data:/app/db
+    networks:
+      - flash_deck_shared_network
+
+  api-gateway:
+    container_name: api_gateway
+    build:
+      context: ./api_gateway
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./api_gateway:/app
+    networks:
+      - flash_deck_shared_network
+    depends_on:
+      - deck-service
+      - quiz-service
+
+volumes:
+  flash_deck_db_data:
 
 networks:
   flash_deck_shared_network:
