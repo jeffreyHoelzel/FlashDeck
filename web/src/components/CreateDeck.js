@@ -24,7 +24,7 @@ function CreateDeckForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const backendUrl = process.env.REACT_APP_API_GATEWAY_URL || "http://api-gateway:8000";
+    const backendUrl = process.env.REACT_APP_API_GATEWAY_URL || "http://localhost:8000";
     const url = `${backendUrl}/api/create_new_deck`;
 
     try {

@@ -10,7 +10,7 @@ function Quiz() {
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
-  const backendUrl = process.env.REACT_APP_API_GATEWAY_URL || "http://api-gateway:8000";
+  const backendUrl = process.env.REACT_APP_API_GATEWAY_URL || "http://localhost:8000";
 
   useEffect(() => {
     const fetchFlashcards = async () => {

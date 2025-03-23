@@ -10,7 +10,7 @@ services:
       - CHOKIDAR_USEPOLLING=true
       - WATCHPACK_POLLING=true
       - NODE_OPTIONS=--openssl-legacy-provider
-      - REACT_APP_API_GATEWAY_URL=http://api-gateway:8000
+      - REACT_APP_API_GATEWAY_URL=http://localhost:8000
     volumes:
       - ./web:/app
       - /app/node_modules

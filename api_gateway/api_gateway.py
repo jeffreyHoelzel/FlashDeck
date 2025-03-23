@@ -5,7 +5,7 @@ import requests
 app = Flask(__name__)
 CORS(app)
 
-SERVICE_URL = "http://localhost:5000"
+SERVICE_URL = "http://backend:5000"
 
 @app.route("/api/<path:path>", methods=["GET", "POST", "PUT", "DELETE"])
 def forward_request(path):
