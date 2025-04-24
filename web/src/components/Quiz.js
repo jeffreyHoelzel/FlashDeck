@@ -15,7 +15,7 @@ function Quiz() {
   useEffect(() => {
     const fetchFlashcards = async () => {
       try {
-        const response = await fetch(`${backendUrl}/quiz_deck/${deckId}`);
+        const response = await fetch(`${backendUrl}/quizzes/quiz_deck/${deckId}`);
         if (response.ok) {
           const data = await response.json();
           setFlashcards(data.flashcards);

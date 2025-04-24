@@ -13,7 +13,7 @@ function EditDeckForm() {
   useEffect(() => {
     const fetchDeck = async () => {
       try {
-        const response = await fetch(`${backendUrl}/get_deck/${deckId}`);
+        const response = await fetch(`${backendUrl}/decks/get_deck/${deckId}`);
         if (response.ok) {
           const data = await response.json();
           setDeckName(data.name);
@@ -50,7 +50,7 @@ function EditDeckForm() {
     e.preventDefault();
 
     try {
-      const response = await fetch(`${backendUrl}/edit_existing_deck/${deckId}`, {
+      const response = await fetch(`${backendUrl}/decks/edit_existing_deck/${deckId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name: deckName, cards }),

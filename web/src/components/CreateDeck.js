@@ -25,7 +25,7 @@ function CreateDeckForm() {
     e.preventDefault();
 
     const backendUrl = process.env.BACKEND_URL || "http://localhost:5000";
-    const url = `${backendUrl}/create_new_deck`;
+    const url = `${backendUrl}/decks/create_new_deck`;
 
     try {
       const response = await fetch(url, {

@@ -11,7 +11,7 @@ function DeckList() {
   useEffect(() => {
     const fetchDecks = async () => {
       try {
-        const response = await fetch(`${backendUrl}/get_all_decks`);
+        const response = await fetch(`${backendUrl}/decks/get_all_decks`);
         if (response.ok) {
           const data = await response.json();
           setDecks(data.decks);
@@ -28,7 +28,7 @@ function DeckList() {
 
   const handleDeckDelete = async (deckId) => {
     try {
-      const response = await fetch(`${backendUrl}/delete_deck/${deckId}`, {
+      const response = await fetch(`${backendUrl}/decks/delete_deck/${deckId}`, {
         method: "DELETE",        
       });
 

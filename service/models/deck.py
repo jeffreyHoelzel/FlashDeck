@@ -1,4 +1,4 @@
-from .database import db
+from database import db
 from sqlalchemy.orm import relationship
 from .quiz_deck_relationship import quiz_deck_relationship
 

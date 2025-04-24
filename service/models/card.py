@@ -1,4 +1,4 @@
-from .database import db
+from database import db
 from sqlalchemy.orm import relationship
 # TODO: finish db set-up using sqlalchemy
 
