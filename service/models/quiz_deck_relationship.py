@@ -1,4 +1,4 @@
-from .database import db
+from extensions import db
 
 quiz_deck_relationship = db.Table(
     "quiz_deck_relationship", db.metadata, 
