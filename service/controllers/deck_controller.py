@@ -3,7 +3,7 @@ from services.deck_services import *
 
 deck_bp = Blueprint("deck", __name__, url_prefix="/decks")
 
-@deck_bp.route("/create_new_deck", methods=["GET"])
+@deck_bp.route("/create_new_deck", methods=["POST"])
 def create_deck():
     data = request.get_json()
 

@@ -1,6 +1,7 @@
 from database import db
 from sqlalchemy.orm import relationship
 from .quiz_deck_relationship import quiz_deck_relationship
+from .quiz import Quiz
 
 class Deck(db.Model):
     __tablename__ = "decks"

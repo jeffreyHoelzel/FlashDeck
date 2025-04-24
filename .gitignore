@@ -5,3 +5,7 @@ web/.npm-cache
 service/Utilities/__pycache__
 service/flashdeck.db
 service/.env
+service/controllers/__pycache__/
+service/models/__pycache__/
+service/repositories/__pycache__/
+service/services/__pycache__/
