@@ -8,3 +8,5 @@ services/deck_service/Utilities/__pycache__
 services/quiz_service/Utilities/__pycache__
 services/deck_service/db
 services/quiz_service/db
+.DS_Store
+service/
